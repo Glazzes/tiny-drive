@@ -1,0 +1,29 @@
+{
+    "properties": [
+        {
+            "name": "pagination.size",
+            "type": "java.lang.Integer",
+            "description": "The given value may be used to define the size of page"
+        },
+        {
+            "name": "drive.base.folder",
+            "type": "java.lang.String",
+            "description": "Given value must be an actual folder within your system, where all user files will be saved"
+        },
+        {
+            "name": "application.jwt.configuration.secret-key",
+            "type": "java.lang.String",
+            "description": "String used to sing the json web token"
+        },
+        {
+            "name": "application.jwt.configuration.prefix",
+            "type": "java.lang.String",
+            "description": "Prefix to used at the start of the token"
+        },
+        {
+            "name": "application.jwt.configuration.validity-in-days",
+            "type": "java.lang.Integer",
+            "description" : "Amount of days this token will be valid"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/drive
+    username: glaze
+    password: straightdalmatian
+  jpa:
+    # hibernate:
+    #   ddl-auto: create
+    show-sql: true
+
+drive:
+  base:
+    folder: /home/glaze/Projects/tiny-drive/drive
+
+management:
+  info:
+    git:
+      mode: full
+  endpoints:
+    web:
+      exposure:
+        include: metrics, health, info, beans
+
+application:
+  jwt:
+    configuration:
+      prefix: Bearer 
+      validity-in-days: 5
+      secret-key: SuperHyperSecretKeyImpossibleToGuessByAnyLivingCretureInThisWholeUniverseMultiverseOrWhateverDimensionExist
