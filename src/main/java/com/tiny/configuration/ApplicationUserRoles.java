@@ -14,7 +14,7 @@ import static com.tiny.configuration.ApplicationUserPermissions.*;
 @AllArgsConstructor
 public enum ApplicationUserRoles {
     USER( Sets.newHashSet(USER_UPLOAD, USER_DELETE) ),
-    ADMIN( Sets.newHashSet(ADMIN_DELETE, ADMIN_UPDATE) );
+    ADMIN( Sets.newHashSet(ADMIN_DELETE, ADMIN_UPDATE, ADMIN_ACTUATOR_ENDPOINTS) );
 
     private Set<ApplicationUserPermissions> permissions;
     

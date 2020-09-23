@@ -1,7 +1,6 @@
 package com.tiny.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,11 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import static com.tiny.configuration.ApplicationUserRoles.*;
 
 import com.tiny.jwt.JwtConfigurationsProperties;
@@ -48,7 +44,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/actuator/**").hasRole("ADMIN")
+            .antMatchers(HttpMethod.GET, "/actuator/**").hasRole(ADMIN.name())
             .antMatchers( HttpMethod.GET, "/").authenticated()
             .anyRequest().permitAll();
     }
@@ -56,17 +52,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
-    }
-
-    @Override
-    protected UserDetailsService userDetailsService() {
-        UserDetails centurion = User.builder()
-                                    .username("centurion")
-                                    .password("centurion")
-                                    .authorities( USER.grantedAuthorities() )
-                                    .build();
-
-        return new InMemoryUserDetailsManager(centurion);
     }
 
 }
