@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title{
+            color: rgb(18, 102, 129);
+            font-weight: 600;
+        }
+
+        .logo{
+            max-width: 100px;
+            object-position: center;
+        }
+
+        .link{
+            text-decoration: none;
+            color: rgb(18, 102, 129);
+        }
+
+        .link:hover{
+            color: rgb(55, 204, 253);
+        }
+
+        small{
+            margin-top: 20px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <img class="logo" src="cid:cloud" alt="No cloud logo found">
+    <h3 class="title">Thank you for choosing us as your cloud storage provider!</h3>
+    <p th:text="${ 'Hi there ' + username + '! To enable your account click on the link below.' }">text</p>
+    <a class="link" th:href="${link}" th:text="${link}">link</a>
+    <small>Tiny drive was made with <3.</small>
+</body>
+</html>

@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.tiny.configuration.ApplicationUserRoles;
 
+import com.tiny.models.UserModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -44,18 +45,22 @@ public class User {
     @Column( name = "editableUsername", nullable = false, length = 100 )
     private String editableUsername;
 
-    @Column( name = "email", length = 150, nullable = false )
+    @Column( name = "email", length = 150, nullable = false, unique = true )
     private String email;
 
-    public User( String username, String password, String email){
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
+
+    public User(UserModel userModel){
         this.id = UUID.randomUUID().toString().replaceAll("[^a-zA-Z0-9]", "");
-        this.username = username;
-        this.editableUsername = username;
-        this.password = password;
+        this.username = userModel.getUsername();
+        this.editableUsername = userModel.getUsername();
+        this.password = userModel.getPassword();
         this.memberSince = LocalDate.now();
         this.profilePicture = "default.png";
         this.roles = ApplicationUserRoles.USER;
-        this.email = email;
+        this.email = userModel.getEmail();
+        this.enabled = false;
     }
 
 }

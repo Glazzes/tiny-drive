@@ -10,13 +10,11 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import com.tiny.entities.User;
-import com.tiny.exceptions.UsernameAlreadyExistsException;
 import com.tiny.models.UserModel;
 import com.tiny.services.UserService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,14 +34,11 @@ public class UserController {
     @PostMapping( path = "/register", consumes = "application/json")
     @Transactional
     public ResponseEntity<?> registerNewUser(
-        @Valid @RequestBody UserModel user
+        @Valid @RequestBody UserModel userModel
     ){
-        try {
-            User newUser =  userService.registerNewUser( user );
-            return new ResponseEntity<>( newUser, HttpStatus.CREATED);
-        } catch (UsernameAlreadyExistsException usernameAlreadyExistsException) {
-            throw usernameAlreadyExistsException;
-        }
+        User newUser = new User(userModel);
+        userService.regitserUser(newUser);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 

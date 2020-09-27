@@ -2,19 +2,24 @@ server:
   port: 8081
 
 spring:
+  mail:
+    host: smtp.mailtrap.io
+    port: 465
+    username: 5badbb71d135e3
+    password: b902bdc5400589
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/drive
     username: glaze
     password: straightdalmatian
   jpa:
-    # hibernate:
-    #   ddl-auto: create
+    hibernate:
+      ddl-auto: none
     show-sql: true
 
 drive:
   base:
-    folder: /home/glaze/Projects/tiny-drive/drive
+    folder: /home/glaze/Projects/tinyDrive/Drive/
 
 management:
   info:

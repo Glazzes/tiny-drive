@@ -2,6 +2,7 @@ package com.tiny.controllers;
 
 import com.tiny.entities.User;
 
+import com.tiny.models.UserModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,6 +24,6 @@ public class HomeController {
 
     @GetMapping( path = "/json", produces = "application/json" )
     public ResponseEntity<User> json(){
-        return new ResponseEntity<User>( new User("glaze", "glaze", "glaze@demo.com"), HttpStatus.CREATED );
+        return new ResponseEntity<User>( new User( new UserModel("glaze", "glaze", "glaze@demo.com")), HttpStatus.CREATED );
     }
 }

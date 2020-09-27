@@ -16,12 +16,14 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;
     private Set<SimpleGrantedAuthority> roles;
+    private boolean enabled;
 
     public UserDetailsImpl( User user ){
         this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.roles = user.getRoles().grantedAuthorities();
+        this.enabled = user.isEnabled();
     }
 
     public String getId(){
@@ -60,7 +62,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
     
 }

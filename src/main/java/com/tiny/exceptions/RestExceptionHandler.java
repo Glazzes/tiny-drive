@@ -24,21 +24,6 @@ public class RestExceptionHandler {
         );
     }
 
-    @ExceptionHandler( value = {UsernameAlreadyExistsException.class} )
-    public ResponseEntity<ExceptionDetails> handleUsernameAleadyExistException(
-        UsernameAlreadyExistsException usernameExist
-    ){
-        return new ResponseEntity<ExceptionDetails>(
-            ExceptionDetails.builder()
-                            .title(usernameExist.getMessage() + " is already in use." )
-                            .statusCode( HttpStatus.BAD_REQUEST.value() )
-                            .developerComment( usernameExist.getClass().getName())
-                            .timestamp( LocalDate.now() )
-                            .build(), HttpStatus.BAD_REQUEST
-        );
-    }
-
-
    @ExceptionHandler( value = {InvalidJwtException.class} )
    public ResponseEntity<ExceptionDetails> handleInvalidJwtException(
        InvalidJwtException invalidJwtException
@@ -51,6 +36,20 @@ public class RestExceptionHandler {
                             .developerComment( InvalidJwtException.class.getName() )
                             .build(), HttpStatus.INTERNAL_SERVER_ERROR
        );
+   }
+
+   @ExceptionHandler( value = {InvalidVerificationTokenException.class})
+    public ResponseEntity<ExceptionDetails> handleInvalidVerificationTokenException(
+            InvalidVerificationTokenException invalidVerificationTokenException
+   ){
+        return  new ResponseEntity<ExceptionDetails>(
+                ExceptionDetails.builder()
+                .title(invalidVerificationTokenException.getMessage())
+                .timestamp(LocalDate.now())
+                .developerComment(invalidVerificationTokenException.getClass().getName())
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .build(), HttpStatus.BAD_REQUEST
+        );
    }
 
 }

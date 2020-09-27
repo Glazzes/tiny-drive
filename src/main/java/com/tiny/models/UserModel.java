@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 
 import com.tiny.entities.User;
 
+import com.tiny.validators.UsernameAlreadyExists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserModel {
-    
-    @NotBlank( message = "Username is reuired")
+
+    @UsernameAlreadyExists
+    @NotBlank( message = "Username is required")
     @Size( min = 3, message = "Username must be at least 3 characters long" )
     private String username;
 
@@ -26,9 +28,5 @@ public class UserModel {
     @NotBlank( message = "Email is required" )
     @Email( message = "Email must be like \"example@example.com\" " )
     private String email;
-
-    public User toUser( String username, String password, String email){
-        return new User( username, password, email);
-    }
 
 }
